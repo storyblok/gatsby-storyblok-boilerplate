@@ -16,7 +16,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 id
                 name
                 created_at
-                published_at
                 uuid
                 slug
                 full_slug
