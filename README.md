@@ -12,6 +12,7 @@ To use this project you have to have a Storyblok account. If you don't have one 
 1. Get the source code and install dependencies.
 ~~~
 git clone https://github.com/storyblok/gatsby-storyblok-boilerplate.git
+cd gatsby-storyblok-boilerplate
 npm install
 ~~~
 

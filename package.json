@@ -3,7 +3,7 @@
   "description": "Gatsby hello world starter",
   "license": "MIT",
   "scripts": {
-    "develop": "gatsby develop",
+    "dev": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve"
   },
