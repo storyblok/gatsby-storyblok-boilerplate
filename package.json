@@ -12,6 +12,7 @@
     "gatsby-link": "^1.6.40",
     "gatsby-source-storyblok": "^0.1.2",
     "serve": "~> 7.0.0",
+    "storyblok-react": "0.0.6",
     "url-parse": "~> 1.4.3"
   }
 }
