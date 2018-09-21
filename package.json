@@ -10,7 +10,7 @@
   "dependencies": {
     "gatsby": "^1.9.250",
     "gatsby-link": "^1.6.40",
-    "gatsby-source-storyblok": "^0.1.1",
+    "gatsby-source-storyblok": "^0.1.2",
     "serve": "~> 7.0.0",
     "url-parse": "~> 1.4.3"
   }
