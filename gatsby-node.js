@@ -1,8 +1,7 @@
-const Promise = require('bluebird')
 const path = require('path')
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
 
   return new Promise((resolve, reject) => {
     const storyblokEntry = path.resolve('src/templates/storyblok-entry.js')
@@ -35,8 +34,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
         const entries = result.data.allStoryblokEntry.edges
         entries.forEach((entry, index) => {
+          let pagePath = entry.node.full_slug == 'home' ? '' : `${entry.node.full_slug}/`
+
           createPage({
-            path: `/${entry.node.full_slug}/`,
+            path: `/${pagePath}`,
             component: storyblokEntry,
             context: {
               story: entry.node

@@ -1,11 +1,11 @@
-import React from 'react';
-import Components from '../components/components.js';
+import React from 'react'
+import Components from '../components/components.js'
 import SbEditable from 'storyblok-react'
 import config from '../../gatsby-config'
 
 const loadStoryblokBridge = function(cb) {
   let sbConfigs = config.plugins.filter((item) => {
-    return item.resolve == 'gatsby-source-storyblok'
+    return item.resolve === 'gatsby-source-storyblok'
   })
   let sbConfig = sbConfigs.length > 0 ? sbConfigs[0] : {}
   let script = document.createElement('script')
@@ -19,7 +19,7 @@ const getParam = function(val) {
   var result = ''
   var tmp = []
 
-  location.search
+  window.location.search
     .substr(1)
     .split('&')
     .forEach(function (item) {
@@ -43,7 +43,7 @@ class StoryblokEntry extends React.Component {
   }
 
   loadStory(payload) {
-    storyblok.get({
+    window.storyblok.get({
       slug: payload.storyId, 
       version: 'draft'
     }, (data) => {
@@ -54,19 +54,22 @@ class StoryblokEntry extends React.Component {
   initStoryblokEvents() {
     this.loadStory({storyId: getParam('path')})
 
-    storyblok.on(['change', 'published'], (payload) => {
+    let sb = window.storyblok
+
+    sb.on(['change', 'published'], (payload) => {
       this.loadStory(payload)
     })
 
-    storyblok.on('input', (payload) => {
+    sb.on('input', (payload) => {
       if (this.state.story && payload.story.id === this.state.story.id) {
+        payload.story.content = sb.addComments(payload.story.content, payload.story.id)
         this.setState({story: payload.story})
       }
     })
 
-    storyblok.pingEditor(() => {
-      if (storyblok.inEditor) {
-        storyblok.enterEditmode()
+    sb.pingEditor(() => {
+      if (sb.inEditor) {
+        sb.enterEditmode()
       }
     })
   }
@@ -81,7 +84,7 @@ class StoryblokEntry extends React.Component {
     return (
       <SbEditable content={content}>
       <div>
-        {React.createElement(Components[content.component], {key: content._uid, blok: content})}
+        {Components[content.component] ? React.createElement(Components[content.component], {key: content._uid, blok: content}) : `Component ${content.component} not created yet`}
       </div>
       </SbEditable>
     )

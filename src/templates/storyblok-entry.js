@@ -3,7 +3,7 @@ import Components from '../components/components.js'
 
 class StoryblokEntry extends React.Component {
   static getDerivedStateFromProps(props, state) {
-    if (state.story.uuid === props.pathContext.story.uuid) {
+    if (state.story.uuid === props.pageContext.story.uuid) {
       return null
     }
 
@@ -11,7 +11,7 @@ class StoryblokEntry extends React.Component {
   }
 
   static prepareStory(props) {
-    const story = Object.assign({}, props.pathContext.story)
+    const story = Object.assign({}, props.pageContext.story)
     story.content = JSON.parse(story.content)
     
     return { story }

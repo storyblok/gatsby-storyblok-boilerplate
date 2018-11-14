@@ -1,18 +1,39 @@
 {
-  "name": "gatsby-starter-hello-world",
-  "description": "Gatsby hello world starter",
+  "name": "gatsby-storyblok-boilerplate",
+  "description": "Gatsby Storyblok starter",
+  "version": "1.0.0",
+  "author": "Alexander Feiglstorfer <delooks@gmail.com>",
+  "dependencies": {
+    "gatsby": "^2.0.19",
+    "gatsby-image": "^2.0.15",
+    "gatsby-plugin-manifest": "^2.0.5",
+    "gatsby-plugin-offline": "^2.0.11",
+    "gatsby-plugin-react-helmet": "^3.0.0",
+    "gatsby-plugin-sharp": "^2.0.7",
+    "gatsby-source-filesystem": "^2.0.4",
+    "gatsby-source-storyblok": "^0.1.2",
+    "gatsby-transformer-sharp": "^2.1.4",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "react-helmet": "^5.2.0",
+    "storyblok-react": "0.0.6"
+  },
+  "keywords": [
+    "gatsby"
+  ],
   "license": "MIT",
   "scripts": {
-    "dev": "gatsby develop",
     "build": "gatsby build",
-    "serve": "gatsby serve"
+    "develop": "gatsby develop",
+    "start": "npm run develop",
+    "format": "prettier --write \"src/**/*.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "gatsby": "^1.9.250",
-    "gatsby-link": "^1.6.40",
-    "gatsby-source-storyblok": "^0.1.2",
-    "serve": "~> 7.0.0",
-    "storyblok-react": "0.0.6",
-    "url-parse": "~> 1.4.3"
+  "devDependencies": {
+    "prettier": "^1.14.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storyblok/gatsby-storyblok-boilerplate"
   }
 }

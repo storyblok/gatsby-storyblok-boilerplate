@@ -18,17 +18,17 @@ npm install
 
 2. Exchange the `accessToken` in `gatsby-config.js` with the preview token of a new empty Storyblok space which you can find on the space settings page.
 
-3. Start the project with `npm run dev` and set the preview domain in Storyblok to `http://localhost:8000/editor?path=`
+3. Start the project with `gatsby develop` and set the preview domain in Storyblok to `http://localhost:8000/editor?path=`
 
 ## Commands
 
 This project comes with a few handy commands for linting and code fixing. The most important ones are the ones to develop and ship code. You can find the most important commands below.
 
-### `npm run dev`
+### `gatsby develop`
 Run in the project locally for development.
 
-### `npm run build`
+### `gatsby build`
 Run a production build into ./public. The result is ready to be put on any static hosting you prefer.
 
-### `npm run deploy`
+### `gatsby deploy`
 Run a production build into ./public and publish the site to GitHub pages.
