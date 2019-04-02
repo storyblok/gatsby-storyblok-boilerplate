@@ -44,7 +44,7 @@ class StoryblokEntry extends React.Component {
 
   loadStory(payload) {
     window.storyblok.get({
-      slug: payload.storyId, 
+      slug: getParam('path'), 
       version: 'draft'
     }, (data) => {
       this.setState({story: data.story})
