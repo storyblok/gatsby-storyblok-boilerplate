@@ -9,7 +9,10 @@ exports.createPages = ({ graphql, actions }) => {
     resolve(
       graphql(
         `{
-          allStoryblokEntry {
+          globalNavi: storyblokEntry(slug: { eq: "global-navi" }) {
+            content
+          }
+          stories: allStoryblokEntry {
             edges {
               node {
                 id
@@ -32,7 +35,9 @@ exports.createPages = ({ graphql, actions }) => {
           reject(result.errors)
         }
 
-        const entries = result.data.allStoryblokEntry.edges
+        const entries = result.data.stories.edges
+        const globalNavi = result.data.globalNavi
+
         entries.forEach((entry, index) => {
           let pagePath = entry.node.full_slug == 'home' ? '' : `${entry.node.full_slug}/`
 
@@ -40,6 +45,7 @@ exports.createPages = ({ graphql, actions }) => {
             path: `/${pagePath}`,
             component: storyblokEntry,
             context: {
+              globalNavi: globalNavi,
               story: entry.node
             }
           })
