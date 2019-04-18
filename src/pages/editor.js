@@ -2,6 +2,7 @@ import React from 'react'
 import Components from '../components/components.js'
 import SbEditable from 'storyblok-react'
 import config from '../../gatsby-config'
+import Navi from '../components/navi.js'
 
 const loadStoryblokBridge = function(cb) {
   let sbConfigs = config.plugins.filter((item) => {
@@ -35,7 +36,7 @@ const getParam = function(val) {
 class StoryblokEntry extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {story: null}
+    this.state = {story: null, globalNavi: {content: {}}}
   }
 
   componentDidMount() {
@@ -51,8 +52,18 @@ class StoryblokEntry extends React.Component {
     })
   }
 
+  loadGlovalNavi() {
+    window.storyblok.get({
+      slug: 'global-navi', 
+      version: 'draft'
+    }, (data) => {
+      this.setState({globalNavi: data.story})
+    })
+  }
+
   initStoryblokEvents() {
     this.loadStory({storyId: getParam('path')})
+    this.loadGlovalNavi()
 
     let sb = window.storyblok
 
@@ -80,10 +91,12 @@ class StoryblokEntry extends React.Component {
     }
 
     let content = this.state.story.content
+    let globalNavi = this.state.globalNavi.content
 
     return (
       <SbEditable content={content}>
       <div>
+        <Navi blok={globalNavi}></Navi>
         {Components[content.component] ? React.createElement(Components[content.component], {key: content._uid, blok: content}) : `Component ${content.component} not created yet`}
       </div>
       </SbEditable>

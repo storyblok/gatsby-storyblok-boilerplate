@@ -8,7 +8,7 @@ module.exports = {
       options: {
         accessToken: 'bJQb8KcUXW4NJ35XJFwGuwtt',
         homeSlug: 'home',
-        version: process.env.NODE_ENV == 'production' ? 'published' : 'draft'
+        version: process.env.NODE_ENV === 'production' ? 'published' : 'draft'
       }
     },
     'gatsby-plugin-react-helmet',
