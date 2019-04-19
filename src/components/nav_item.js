@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import SbEditable from 'storyblok-react'
 
 const Teaser = (props) => (
   <li className="nav-item active">
