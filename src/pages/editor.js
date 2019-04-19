@@ -49,12 +49,14 @@ class StoryblokEntry extends React.Component {
       version: 'draft'
     }, (data) => {
       this.setState({story: data.story})
+      this.loadGlovalNavi(data.story.lang)
     })
   }
 
-  loadGlovalNavi() {
+  loadGlovalNavi(lang) {
+    const language = lang === 'default' ? '' : lang + '/'
     window.storyblok.get({
-      slug: 'global-navi', 
+      slug: `${language}global-navi`, 
       version: 'draft'
     }, (data) => {
       this.setState({globalNavi: data.story})
@@ -63,7 +65,6 @@ class StoryblokEntry extends React.Component {
 
   initStoryblokEvents() {
     this.loadStory({storyId: getParam('path')})
-    this.loadGlovalNavi()
 
     let sb = window.storyblok
 

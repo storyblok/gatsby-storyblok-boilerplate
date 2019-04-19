@@ -9,9 +9,6 @@ exports.createPages = ({ graphql, actions }) => {
     resolve(
       graphql(
         `{
-          globalNavi: storyblokEntry(slug: { eq: "global-navi" }) {
-            content
-          }
           stories: allStoryblokEntry {
             edges {
               node {
@@ -20,6 +17,7 @@ exports.createPages = ({ graphql, actions }) => {
                 created_at
                 uuid
                 slug
+                field_component
                 full_slug
                 content
                 is_startpage
@@ -36,16 +34,24 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         const entries = result.data.stories.edges
-        const globalNavi = result.data.globalNavi
+        const contents = entries.filter((entry) => {
+          return entry.node.field_component != 'global_navi'
+        })
 
-        entries.forEach((entry, index) => {
-          let pagePath = entry.node.full_slug == 'home' ? '' : `${entry.node.full_slug}/`
+        contents.forEach((entry, index) => {
+          const pagePath = entry.node.full_slug == 'home' ? '' : `${entry.node.full_slug}/`
+          const globalNavi = entries.filter((globalEntry) => {
+            return globalEntry.node.field_component == 'global_navi' && globalEntry.node.lang == entry.node.lang
+          })
+          if (!globalNavi.length) {
+            throw new Error('The global navigation item has not been found. Please create a content item with the content type global_navi in Storyblok.')
+          }
 
           createPage({
             path: `/${pagePath}`,
             component: storyblokEntry,
             context: {
-              globalNavi: globalNavi,
+              globalNavi: globalNavi[0],
               story: entry.node
             }
           })
