@@ -33,7 +33,7 @@ class StoryblokEntry extends React.Component {
     return (
       <div>
         <Navi blok={globalNavi}></Navi>
-        {React.createElement(Components[content.component], {key: content._uid, blok: content})}
+        {React.createElement(Components(content.component), {key: content._uid, blok: content})}
       </div>
     )
   }

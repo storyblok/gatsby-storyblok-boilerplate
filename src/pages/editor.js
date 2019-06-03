@@ -98,7 +98,7 @@ class StoryblokEntry extends React.Component {
       <SbEditable content={content}>
       <div>
         <Navi blok={globalNavi}></Navi>
-        {Components[content.component] ? React.createElement(Components[content.component], {key: content._uid, blok: content}) : `Component ${content.component} not created yet`}
+        {React.createElement(Components(content.component), {key: content._uid, blok: content})}
       </div>
       </SbEditable>
     )
