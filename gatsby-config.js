@@ -11,6 +11,7 @@ module.exports = {
         version: process.env.NODE_ENV === 'production' ? 'published' : 'draft'
       }
     },
+    'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-source-filesystem`,
