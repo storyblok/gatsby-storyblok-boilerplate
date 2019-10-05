@@ -4,11 +4,13 @@ import SbEditable from 'storyblok-react'
 import config from '../../gatsby-config'
 import Navi from '../components/navi.js'
 
+let sbConfigs = config.plugins.filter((item) => {
+  return item.resolve === 'gatsby-source-storyblok'
+})
+let sbConfig = sbConfigs.length > 0 ? sbConfigs[0] : {}
+
 const loadStoryblokBridge = function(cb) {
-  let sbConfigs = config.plugins.filter((item) => {
-    return item.resolve === 'gatsby-source-storyblok'
-  })
-  let sbConfig = sbConfigs.length > 0 ? sbConfigs[0] : {}
+  
   let script = document.createElement('script')
   script.type = 'text/javascript'
   script.src = `//app.storyblok.com/f/storyblok-latest.js?t=${sbConfig.options.accessToken}`
@@ -46,7 +48,8 @@ class StoryblokEntry extends React.Component {
   loadStory(payload) {
     window.storyblok.get({
       slug: getParam('path'), 
-      version: 'draft'
+      version: 'draft',
+      resolve_relations: sbConfig.options.resolveRelations || []
     }, (data) => {
       this.setState({story: data.story})
       this.loadGlovalNavi(data.story.lang)
