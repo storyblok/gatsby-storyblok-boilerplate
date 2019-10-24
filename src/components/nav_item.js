@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'gatsby-link'
 import SbEditable from 'storyblok-react'
 
-const Teaser = (props) => (
+const NavItem = (props) => (
   <SbEditable content={props.blok}>
     <li className="nav-item active">
       <Link className="nav-link" to={'/' + (props.blok.link.cached_url === 'home' ? '' : props.blok.link.cached_url)}>
@@ -12,4 +12,4 @@ const Teaser = (props) => (
   </SbEditable>
 )
 
-export default Teaser
+export default NavItem
