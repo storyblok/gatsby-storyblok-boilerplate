@@ -1,34 +1,55 @@
-# Introduction
+# Storyblok Gatsby Boilerplate
 
-This repo is a Gatsby [Storyblok](https://www.storyblok.com) starter template used in following tutorial:
-[www.storyblok.com/tp/gatsby-multilanguage-website-tutorial](https://www.storyblok.com/tp/gatsby-multilanguage-website-tutorial)
+This repository is a Gatsby [Storyblok](https://www.storyblok.com) starter template used in following [tutorial](https://www.storyblok.com/tp/gatsby-multilanguage-website-tutorial).
 
 ## Requirements
 
-To use this project you have to have a Storyblok account. If you don't have one yet you can register at [www.storyblok.com](https://www.storyblok.com).
+To use this project you have to have a Storyblok account. If you don't have one yet you can register at [Storyblok](https://www.storyblok.com), it's free.
 
 ## Getting started
 
-1. Get the source code and install dependencies.
-~~~
-git clone https://github.com/storyblok/gatsby-storyblok-boilerplate.git
-cd gatsby-storyblok-boilerplate
-npm install
-~~~
+### 1. Get the source code.
 
-2. Exchange the `accessToken` in `gatsby-config.js` with the preview token of a new empty Storyblok space which you can find on the space settings page.
+```sh
+  $ git clone https://github.com/storyblok/gatsby-storyblok-boilerplate.git
+```
 
-3. Start the project with `gatsby develop` and set the preview domain in Storyblok to `http://localhost:8000/editor?path=`
+### 2. Install all dependecies 
+```sh
+$  yarn # or npm install
+```
 
-## Commands
+### 3. Adding the Access token
+Exchange the `accessToken` in `gatsby-config.js` with the preview token of a new empty <strong>Storyblok</strong> space which you can find on the space settings page.
 
-This project comes with a few handy commands for linting and code fixing. The most important ones are the ones to develop and ship code. You can find the most important commands below.
+```js
+// in gatsby-config.js
+plugins: [
+  {
+    resolve: 'gatsby-source-storyblok',
+    options: {
+      accessToken: 'Your_Accesse_Token_Here',
+      homeSlug: 'home',
+    }
+  }
+]
+```
 
-### `gatsby develop`
-Run in the project locally for development.
+### 4. Run your project
+Set the preview domain in Storyblok to `http://localhost:8000/editor?path=`
 
-### `gatsby build`
-Run a production build into ./public. The result is ready to be put on any static hosting you prefer.
+```sh
+# to run in developer mode
+$ yarn develop # or npm run develop
+```
 
-### `gatsby deploy`
-Run a production build into ./public and publish the site to GitHub pages.
+```sh
+# to build your project
+$ yarn build # or npm run build
+```
+
+---
+
+<p align="center">
+  <h5 align="center">Powered by <a href="https://www.storyblok.com/" title="link to the Storyblok website">Storyblok</a></h5>
+</p>
