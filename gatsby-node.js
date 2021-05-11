@@ -1,62 +1,58 @@
-const path = require('path')
+/**
+ * Implement Gatsby's Node APIs in this file.
+ *
+ * See: https://www.gatsbyjs.com/docs/node-apis/
+ */
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
+ const path = require('path')
 
-  return new Promise((resolve, reject) => {
-    const storyblokEntry = path.resolve('src/templates/storyblok-entry.js')
+ exports.createPages = ({ graphql, actions }) => {
+    const { createPage } = actions
 
-    resolve(
-      graphql(
-        `{
-          stories: allStoryblokEntry {
-            edges {
-              node {
-                id
-                name
-                created_at
-                uuid
-                slug
-                field_component
-                full_slug
-                content
-                is_startpage
-                parent_id
-                group_id
+    return new Promise((resolve, reject) => {
+        // sets the template for the pages
+        const storyblokEntry = path.resolve('src/templates/page.js')
+    
+        // gets all storyblok stories with the content type 'page'
+        resolve(
+          graphql(
+            `{
+              stories: allStoryblokEntry(filter: {field_component: {eq: "page"}}) {
+                edges {
+                  node {
+                    id
+                    name
+                    slug
+                    field_component
+                    full_slug
+                    content
+                  }
+                }
               }
+            }`
+          ).then(result => {
+            if (result.errors) {
+              console.log(result.errors)
+              reject(result.errors)
             }
-          }
-        }`
-      ).then(result => {
-        if (result.errors) {
-          console.log(result.errors)
-          reject(result.errors)
-        }
-
-        const entries = result.data.stories.edges
-        const contents = entries.filter((entry) => {
-          return entry.node.field_component != 'global_navi'
-        })
-
-        contents.forEach((entry, index) => {
-          const pagePath = entry.node.full_slug == 'home' ? '' : `${entry.node.full_slug}/`
-          const globalNavi = entries.filter((globalEntry) => {
-            return globalEntry.node.field_component == 'global_navi' && globalEntry.node.lang == entry.node.lang
+    
+            const entries = result.data.stories.edges
+            
+            // creates a page for each entry with the storyblok slug
+            entries.forEach((entry) => {
+                // skip home story
+                if(entry.slug !== "home") {
+                    const page = {
+                        path: `/${entry.node.full_slug}`,
+                        component: storyblokEntry,
+                        context: {
+                            story: entry.node
+                        }
+                    }
+                    createPage(page)
+                }
+            })
           })
-          if (!globalNavi.length) {
-            throw new Error('The global navigation item has not been found. Please create a content item with the content type global_navi in Storyblok.')
-          }
-
-          createPage({
-            path: `/${pagePath}`,
-            component: storyblokEntry,
-            context: {
-              globalNavi: globalNavi[0].node,
-              story: entry.node
-            }
-          })
-        })
+        )
       })
-    )
-  })
-}
+ }
