@@ -8,9 +8,9 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import DynamicComponent from "../components/dynamicComponent"
 
-const IndexPage = ({ data }) => { 
+const IndexPage = ({ data, location }) => { 
   let story = data.storyblokEntry
-  story.content = JSON.parse(story.content)
+  story = useStoryblok(story, location)
 
   const components = story.content.body.map(blok => {
     return (<DynamicComponent blok={blok} key={blok._uid} />)
