@@ -1,16 +1,26 @@
 import * as React from "react"
 import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
+import { graphql } from 'gatsby'
+import SbEditable from 'storyblok-react'
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import DynamicComponent from "../components/dynamicComponent"
 
-const IndexPage = () => (
+const IndexPage = ({ data }) => { 
+  let story = data.storyblokEntry
+  story.content = JSON.parse(story.content)
+
+  const components = story.content.body.map(blok => {
+    return (<DynamicComponent blok={blok} key={blok._uid} />)
+  })
+
+  return (
   <Layout>
     <Seo title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
+    <h1>{ story.content.title }</h1>
+    { components }
     <StaticImage
       src="../images/gatsby-astronaut.png"
       width={300}
@@ -24,6 +34,15 @@ const IndexPage = () => (
       <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
     </p>
   </Layout>
-)
+)}
 
 export default IndexPage
+
+export const query = graphql`
+  query HomeQuery {
+    storyblokEntry(full_slug: {eq: "home"}) {
+      content
+      name
+    }
+  }
+`
