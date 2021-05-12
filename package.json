@@ -19,6 +19,7 @@
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
         "react-helmet": "^6.1.0",
+        "storyblok-js-client": "^4.0.9",
         "storyblok-react": "^0.1.2"
     },
     "devDependencies": {
