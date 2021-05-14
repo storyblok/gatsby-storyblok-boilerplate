@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.development`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -30,13 +34,13 @@ module.exports = {
     },
     `gatsby-plugin-gatsby-cloud`,
     {
-      resolve: 'gatsby-source-storyblok',
+      resolve: "gatsby-source-storyblok",
       options: {
-        accessToken: 'YOUR-PREVIEW-TOKEN',
-        version: 'draft',
-        // languages: ['de', 'at'] // Optional parameter. Omission will retrieve all languages by default.
-      }
-    }
+        accessToken: process.env.GATSBY_STORYBLOK_TOKEN,
+        version: process.env.NODE_ENV === "production" ? "published" : "draft",
+        ...require("./storyblok.config"),
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

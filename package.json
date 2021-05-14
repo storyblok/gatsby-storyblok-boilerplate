@@ -23,6 +23,7 @@
         "storyblok-react": "^0.1.2"
     },
     "devDependencies": {
+        "dotenv": "^9.0.2",
         "eslint": "^7.26.0",
         "eslint-plugin-react": "^7.23.2",
         "prettier": "2.2.1"
