@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react"
 import StoryblokClient from "storyblok-js-client"
+import { omit, snakeCase } from "lodash"
 import sbConfig from "../../storyblok.config"
 
 const TOKEN = process.env.GATSBY_STORYBLOK_TOKEN
+const CONFIG = omit(sbConfig, ["homeSlug", "includeLinks"])
+const _CONFIG = Object.entries(CONFIG).reduce(
+  (acc, [key, value]) => ({
+    ...acc,
+    ...{ [snakeCase(key)]: value },
+  }),
+  {}
+)
 
 const Storyblok = new StoryblokClient({
   accessToken: TOKEN,
@@ -24,7 +33,7 @@ export default function useStoryblok(originalStory, location) {
     const { StoryblokBridge } = window
 
     if (typeof StoryblokBridge !== "undefined") {
-      const storyblokInstance = new StoryblokBridge(sbConfig)
+      const storyblokInstance = new StoryblokBridge(CONFIG)
 
       storyblokInstance.on(["published", "change"], () => {
         // reloade project on save an publish
@@ -42,7 +51,7 @@ export default function useStoryblok(originalStory, location) {
         // loading the draft version on initial view of the page
         Storyblok.get(`cdn/stories/${event.storyId}`, {
           version: "draft",
-          ...sbConfig,
+          ..._CONFIG,
         })
           .then(({ data }) => {
             if (data.story) {
