@@ -1,5 +1,5 @@
 import { sbEditable } from "@storyblok/storyblok-editable"
-import Teaser from "./Teaser"
+import Teaser from "./teaser"
 import React from "react"
 
 const Components = {
