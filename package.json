@@ -5,6 +5,7 @@
     "version": "0.1.0",
     "author": "Lisi Linhart",
     "dependencies": {
+        "@storyblok/storyblok-editable": "^1.0.0",
         "gatsby": "^3.4.1",
         "gatsby-plugin-gatsby-cloud": "^2.4.1",
         "gatsby-plugin-image": "^1.4.0",
@@ -19,8 +20,7 @@
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
         "react-helmet": "^6.1.0",
-        "storyblok-js-client": "^4.0.9",
-        "storyblok-react": "^0.1.2"
+        "storyblok-js-client": "^4.0.9"
     },
     "devDependencies": {
         "eslint": "^7.26.0",
