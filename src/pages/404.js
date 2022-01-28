@@ -21,7 +21,7 @@ const NotFoundPage = ({ location }) => {
   return (
   <Layout>
     <Seo title="Home" />
-    <div {...sbEditable(story)} content={story ? story.content : false }>
+    <div {...sbEditable(story ? story.content : false)}>
       <h1>{ story ? story.content.title : 'Not Found' }</h1>
       { components }
       <StaticImage
