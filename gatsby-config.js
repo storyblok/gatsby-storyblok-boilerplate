@@ -34,6 +34,7 @@ module.exports = {
       options: {
         accessToken: 'YOUR-PREVIEW-TOKEN',
         version: 'draft',
+        localAssets: true,
         // languages: ['de', 'at'] // Optional parameter. Omission will retrieve all languages by default.
       }
     }
