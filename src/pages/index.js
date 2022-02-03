@@ -1,13 +1,13 @@
 import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+
 import { graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import useStoryblok from "../lib/storyblok"
 import { sbEditable } from "@storyblok/storyblok-editable"
+import DynamicComponent from "../components/dynamicComponent"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import DynamicComponent from "../components/dynamicComponent"
 
 const IndexPage = ({ data, location }) => {
   let story = data.storyblokEntry
@@ -17,24 +17,15 @@ const IndexPage = ({ data, location }) => {
     return (<DynamicComponent blok={blok} key={blok._uid} />)
   })
 
+  const image = getImage(data.image1)
+
   return (
     <Layout>
       <div {...sbEditable(story.content)}>
         <Seo title="Home" />
-        <h1>{ story.content.title }</h1>
-        { components }
-        <StaticImage
-          src="../images/gatsby-astronaut.png"
-          width={300}
-          quality={95}
-          formats={["AUTO", "WEBP", "AVIF"]}
-          alt="A Gatsby astronaut"
-          style={{ marginBottom: `1.45rem` }}
-        />
-        <p>
-          <Link to="/page-2/">Go to page 2</Link> <br />
-          <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-        </p>
+        <h1>{story.content.title}</h1>
+        {components}
+        <GatsbyImage image={image} />
       </div>
     </Layout>
   )
@@ -47,6 +38,17 @@ export const query = graphql`
     storyblokEntry(full_slug: {eq: "home"}) {
       content
       name
-    }
+    },
+    image1: file(name: {eq: "image-1"}) {
+      name
+      absolutePath
+      childImageSharp {
+        gatsbyImageData(
+          width: 500
+          placeholder: BLURRED
+          formats: [AUTO, WEBP, AVIF]
+        )
+      }
+    },
   }
 `
