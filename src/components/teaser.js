@@ -1,10 +1,12 @@
 import * as React from "react"
+import { storyblokEditable } from "gatsby-source-storyblok";
 
-const Teaser = ({ blok }) => (
-    <div>
-        <h2>{blok.headline}</h2>
-        <pre>{JSON.stringify(blok, null, 2)}</pre>
+const Teaser = ({ blok }) => {
+  return (
+    <div {...storyblokEditable(blok)}>
+      <h1>{blok.headline}</h1>
     </div>
-)
+  )
+}
 
 export default Teaser

@@ -3,6 +3,7 @@ module.exports = {
     title: `Gatsby Default Starter`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
+    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -23,21 +24,22 @@ module.exports = {
         short_name: `starter`,
         start_url: `/`,
         background_color: `#663399`,
-        theme_color: `#663399`,
+        // This will impact how browsers show your PWA/website
+        // https://css-tricks.com/meta-theme-color-and-trickery/
+        // theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    `gatsby-plugin-gatsby-cloud`,
     {
       resolve: 'gatsby-source-storyblok',
       options: {
-        accessToken: '32ewkwNTh2TkFG4UE8oAjQtt',
-        version: 'draft',
-        localAssets: true,
+        accessToken: 'OurklwV5XsDJTIE1NJaD2wtt',
+        version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
+        localAssets: true, // Optional parameter to download the images to use with Gatsby Image Plugin
         // languages: ['de', 'at'] // Optional parameter. Omission will retrieve all languages by default.
       }
-    }
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
