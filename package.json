@@ -13,7 +13,7 @@
         "gatsby-plugin-react-helmet": "^5.17.0",
         "gatsby-plugin-sharp": "^4.17.0",
         "gatsby-source-filesystem": "^4.17.0",
-        "gatsby-source-storyblok": "^4.0.1",
+        "gatsby-source-storyblok": "^4.1.0",
         "gatsby-transformer-sharp": "^4.17.0",
         "prop-types": "^15.8.1",
         "react": "^18.2.0",
@@ -21,9 +21,13 @@
         "react-helmet": "^6.1.0"
     },
     "devDependencies": {
+        "@types/node": "^18.6.2",
+        "@types/react": "^18.0.15",
+        "@types/react-dom": "^18.0.6",
         "eslint": "^8.18.0",
         "eslint-plugin-react": "^7.30.0",
-        "prettier": "2.5.1"
+        "prettier": "2.5.1",
+        "typescript": "^4.7.4"
     },
     "keywords": [
         "gatsby"
