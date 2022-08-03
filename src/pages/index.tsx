@@ -25,7 +25,7 @@ export default IndexPage
 
 export const query = graphql`
   query HomeQuery {
-    storyblokEntry(full_slug: { eq: "gatsby/" }) {
+    storyblokEntry(full_slug: { eq: "home" }) {
       content
       name
       full_slug
