@@ -6,7 +6,7 @@ import Grid from "./grid"
 import Feature from "./feature"
 
 storyblokInit({
-  accessToken: process.env.GATSBY_PREVIEW_STORYBLOK,
+  accessToken: process.env.GATSBY_PUBLIC_STORYBLOK,
   use: [apiPlugin],
   components: {
     teaser: Teaser,
