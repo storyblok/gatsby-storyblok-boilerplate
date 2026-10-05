@@ -1,3 +1,6 @@
+> [!WARNING]
+> This repository is no longer maintained.
+
 # Gatsby.js Storyblok Boilerplate
 This repository is a Gatsby.js [Storyblok](https://www.storyblok.com/) starter template used in following [5 minute tutorial](https://www.storyblok.com/tp/add-a-headless-cms-to-gatsby-5-minutes).
 
